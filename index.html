@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bəxşiş Kartı</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: one centered column over a slow-moving warm gradient field. Glass bank card on top, then two separate copy actions, then copy-all. AZ / RU / EN. */
+:root{
+  --bg:#120d0a; --bg2:#1b120d;
+  --fg:#fff7f0; --muted:#bfae9f;
+  --accent:#ff8a2b; --accent2:#ffb347; --coral:#ff5a4d;
+  --glass:rgba(255,244,235,.07); --glass-line:rgba(255,226,200,.16);
+  --card-a:#3a2417; --card-b:#1d120c; --card-text:#fff7f0;
+  --orb1:rgba(255,122,26,.55); --orb2:rgba(255,76,60,.38); --orb3:rgba(255,190,90,.30);
+  --grid:rgba(255,220,190,.06);
+  --btn-bg:linear-gradient(135deg,#ff9a3c,#ff6a1f); --btn-fg:#2a1204;
+  --btn2-bg:rgba(255,244,235,.10); --btn2-fg:#fff7f0;
+  --ok:#2ecc71; --ok-fg:#04210f; --shadow:rgba(0,0,0,.45);
+  --display:"Space Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --body:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#fff4e8; --bg2:#ffe7d1; --fg:#2b1608; --muted:#7a6350; --accent:#d9560a; --accent2:#f08a24; --coral:#d83b2e;
+    --glass:rgba(255,255,255,.62); --glass-line:rgba(120,70,20,.16);
+    --card-a:#ff9b45; --card-b:#e8531c; --card-text:#fffaf5;
+    --orb1:rgba(255,140,50,.42); --orb2:rgba(255,90,70,.28); --orb3:rgba(255,200,110,.50);
+    --grid:rgba(120,60,10,.07);
+    --btn-bg:linear-gradient(135deg,#f07a1c,#d9480a); --btn-fg:#fffaf5;
+    --btn2-bg:rgba(255,255,255,.75); --btn2-fg:#2b1608;
+    --ok:#1b9e55; --ok-fg:#ffffff; --shadow:rgba(120,60,10,.25); color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#fff4e8; --bg2:#ffe7d1; --fg:#2b1608; --muted:#7a6350; --accent:#d9560a; --accent2:#f08a24; --coral:#d83b2e;
+  --glass:rgba(255,255,255,.62); --glass-line:rgba(120,70,20,.16);
+  --card-a:#ff9b45; --card-b:#e8531c; --card-text:#fffaf5;
+  --orb1:rgba(255,140,50,.42); --orb2:rgba(255,90,70,.28); --orb3:rgba(255,200,110,.50);
+  --grid:rgba(120,60,10,.07);
+  --btn-bg:linear-gradient(135deg,#f07a1c,#d9480a); --btn-fg:#fffaf5;
+  --btn2-bg:rgba(255,255,255,.75); --btn2-fg:#2b1608;
+  --ok:#1b9e55; --ok-fg:#ffffff; --shadow:rgba(120,60,10,.25); color-scheme:light;
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100%}
+body{
+  margin:0;position:relative;overflow-x:hidden;
+  background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--fg);font-family:var(--body);
+  padding-block:30px 44px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+
+/* animated backdrop */
+.fx{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.grid{position:absolute;inset:-60px;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:44px 44px;
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,#000 25%,transparent 75%);mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,#000 25%,transparent 75%);animation:pan 30s linear infinite}
+.orb{position:absolute;border-radius:50%;filter:blur(60px);will-change:transform}
+.o1{width:360px;height:360px;background:var(--orb1);top:-90px;left:-110px;animation:d1 18s ease-in-out infinite}
+.o2{width:320px;height:320px;background:var(--orb2);top:38%;right:-130px;animation:d2 22s ease-in-out infinite}
+.o3{width:300px;height:300px;background:var(--orb3);bottom:-110px;left:10%;animation:d3 26s ease-in-out infinite}
+@keyframes pan{to{transform:translate(44px,44px)}}
+@keyframes d1{50%{transform:translate(90px,70px) scale(1.12)}}
+@keyframes d2{50%{transform:translate(-80px,-60px) scale(.9)}}
+@keyframes d3{50%{transform:translate(70px,-80px) scale(1.15)}}
+
+main{position:relative;z-index:1;max-width:440px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+header{text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:var(--glass);border:1px solid var(--glass-line);
+  font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--accent2);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);box-shadow:0 0 0 0 var(--accent2);animation:ping 2.4s ease-out infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 var(--accent2)}70%,100%{box-shadow:0 0 0 10px transparent}}
+h1{margin:4px 0 0;font-family:var(--display);font-size:30px;line-height:1.15;font-weight:700;text-wrap:balance}
+h1 span{background:linear-gradient(90deg,var(--accent2),var(--coral),var(--accent2));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:flow 6s linear infinite}
+@keyframes flow{to{background-position:200% 0}}
+.alt{margin:0;font-size:17px;line-height:1.35;font-weight:500;color:var(--fg);text-wrap:balance}
+.alt.m{color:var(--muted)}
+
+/* glass bank card */
+.card{position:relative;aspect-ratio:1.586;width:100%;border-radius:26px;padding:clamp(16px,5vw,24px);overflow:hidden;color:var(--card-text);
+  background:radial-gradient(120% 90% at 100% 0%,rgba(255,255,255,.18),transparent 55%),linear-gradient(135deg,var(--card-a),var(--card-b));
+  border:1px solid var(--glass-line);box-shadow:0 30px 60px -20px var(--shadow),0 0 0 1px rgba(255,255,255,.04) inset;
+  display:flex;flex-direction:column;justify-content:space-between;animation:float 7s ease-in-out infinite}
+.card::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.22) 50%,transparent 62%);transform:translateX(-120%);animation:sheen 6.5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-6px)}}
+@keyframes sheen{0%,55%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+.top{display:flex;justify-content:space-between;align-items:center}
+.bank{font-family:var(--display);font-weight:700;letter-spacing:.06em;font-size:15px}
+.chip{width:44px;height:33px;border-radius:7px;background:linear-gradient(135deg,#f6d58b,#c9984a);position:relative;box-shadow:0 1px 0 rgba(255,255,255,.4) inset}
+.chip::before,.chip::after{content:"";position:absolute;background:rgba(80,50,10,.35)}
+.chip::before{left:0;right:0;top:50%;height:1px}.chip::after{top:0;bottom:0;left:50%;width:1px}
+.num{font-family:var(--display);font-weight:700;font-size:clamp(19px,6.2vw,26px);letter-spacing:.07em;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:pointer;
+  user-select:all;-webkit-user-select:all;text-shadow:0 2px 10px rgba(0,0,0,.25)}
+.bottom{display:flex;justify-content:space-between;align-items:flex-end}
+.k{font-size:10px;letter-spacing:.12em;opacity:.78;font-weight:600;margin-bottom:3px}
+.exp{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.06em;cursor:pointer;user-select:all;-webkit-user-select:all}
+.wave{width:34px;height:34px;opacity:.85}
+
+/* actions */
+.actions{display:flex;flex-direction:column;gap:10px}
+button{
+  font:inherit;border:0;border-radius:18px;padding:14px 18px;cursor:pointer;min-height:56px;text-align:center;
+  display:flex;flex-direction:column;gap:2px;align-items:center;justify-content:center;
+  background:var(--btn-bg);color:var(--btn-fg);box-shadow:0 14px 28px -12px rgba(255,106,31,.7);transition:transform .15s ease,filter .15s ease}
+button .t{font-weight:700;font-size:17px;line-height:1.25}
+button .s{font-weight:500;font-size:12.5px;line-height:1.3;opacity:.82}
+button:hover{filter:brightness(1.06)}
+button:active{transform:scale(.98)}
+button:focus-visible{outline:3px solid var(--fg);outline-offset:3px}
+button.alt2{background:var(--btn2-bg);color:var(--btn2-fg);border:1px solid var(--glass-line);box-shadow:none;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+button.ok{background:var(--ok);color:var(--ok-fg);box-shadow:none}
+.note{text-align:center;color:var(--muted);font-size:12px;line-height:1.5;min-height:16px;margin:0}
+.foot{text-align:center;color:var(--muted);font-size:12px;letter-spacing:.04em}
+
+@media (prefers-reduced-motion:reduce){
+  .grid,.orb,.card,.card::after,.dot,h1 span{animation:none}
+  .card::after{display:none}
+  button{transition:none}button:active{transform:none}
+}
+</style>
+</head>
+<body>
+
+
+<div class="fx" aria-hidden="true"><div class="grid"></div><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+
+<main>
+  <header>
+    <div class="pill"><span class="dot"></span>TƏŞƏKKÜR EDİRİK · СПАСИБО · THANK YOU</div>
+    <h1>Bəxşişiniz bizim üçün <span>dəyərlidir</span></h1>
+    <p class="alt">Ваши чаевые очень ценны для нас</p>
+    <p class="alt m">Your tip means a lot to us</p>
+  </header>
+
+  <section class="card" aria-label="Kart · Карта · Card">
+    <div class="top">
+      <span class="bank">Unibank</span>
+      <svg class="wave" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 7c2 3 2 7 0 10M12 5c3 4.5 3 9.5 0 14M16 3c4 6 4 12 0 18"/></svg>
+    </div>
+    <div class="chip" aria-hidden="true"></div>
+    <div class="num" id="num" data-copy="5243754418666135" data-target="main">5243 7544 1866 6135</div>
+    <div class="bottom">
+      <div><div class="k">SON İSTİFADƏ · СРОК · EXPIRY</div><div class="exp" id="exp" data-copy="09/29">09/29</div></div>
+    </div>
+  </section>
+
+  <div class="actions">
+    <button type="button" data-copy="5243754418666135" data-target="num"><span class="t">Kart nömrəsini kopyala</span><span class="s">Копировать номер карты · Copy card number</span></button>
+    <button type="button" class="alt2" data-copy="09/29" data-target="exp"><span class="t">Tarixi kopyala</span><span class="s">Копировать срок действия · Copy expiry date</span></button>
+    <button type="button" class="alt2" data-copy="5243754418666135 09/29" data-target="num"><span class="t">Hamısını kopyala</span><span class="s">Копировать всё · Copy all</span></button>
+  </div>
+  <p class="note" id="note" role="status" aria-live="polite"></p>
+  <p class="foot">Kopyalayın və bank tətbiqində yapışdırın · Скопируйте и вставьте в приложении банка · Copy and paste in your banking app</p>
+</main>
+
+<script>
+(function(){
+  var note=document.getElementById('note');
+  function selectEl(id){
+    try{var el=document.getElementById(id);if(!el)return;var r=document.createRange();r.selectNodeContents(el);var s=window.getSelection();s.removeAllRanges();s.addRange(r);}catch(e){}
+  }
+  function legacy(t){
+    try{var a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();var ok=document.execCommand('copy');a.remove();return ok;}catch(e){return false;}
+  }
+  function copy(t,okCb,failCb){
+    var p;
+    try{p=navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(t):Promise.reject();}catch(e){p=Promise.reject();}
+    p.then(okCb).catch(function(){if(legacy(t)){okCb();}else{failCb();}});
+  }
+  var FAIL='Yazının üzərinə uzun basıb “Kopyala” seçin. · Нажмите и удерживайте текст, затем выберите «Копировать». · Long-press the text and choose “Copy”.';
+  document.querySelectorAll('button[data-copy]').forEach(function(b){
+    var orig=b.innerHTML;
+    b.addEventListener('click',function(){
+      copy(b.getAttribute('data-copy'),function(){
+        b.innerHTML='<span class="t">Kopyalandı ✓</span><span class="s">Скопировано · Copied</span>';b.classList.add('ok');note.textContent='';
+        setTimeout(function(){b.innerHTML=orig;b.classList.remove('ok');},1600);
+      },function(){selectEl(b.getAttribute('data-target'));note.textContent=FAIL;});
+    });
+  });
+  ['num','exp'].forEach(function(id){
+    var el=document.getElementById(id);
+    el.addEventListener('click',function(){
+      copy(el.getAttribute('data-copy'),function(){note.textContent='Kopyalandı ✓ · Скопировано · Copied';setTimeout(function(){note.textContent='';},1600);},
+        function(){selectEl(id);note.textContent=FAIL;});
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
